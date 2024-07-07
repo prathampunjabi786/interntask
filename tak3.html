@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        .slider {
+            width: 300px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slider-image {
+            width: 300px;
+            height: 200px;
+        }
+        .slider-button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <div class="slider-container">
+            <img class="slider-image" src="https://feeds.abplive.com/onecms/images/uploaded-images/2023/10/19/1fa5a5a3f2b7a9383cd82809f1f1b4f61697725374434428_original.jpg?impolicy=abp_cdn&imwidth=650" alt="Image 1">
+            <img class="slider-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/2021_Ferrari_F8_Tributo.jpg/1024px-2021_Ferrari_F8_Tributo.jpg" alt="Image 2">
+            <img class="slider-image" src="https://images.firstpost.com/wp-content/uploads/2021/08/lamborghini-aventador-ultimae-india-launch-confirmed-but-its-already-sold-out.jpg?impolicy=website&width=640&height=363" alt="Image 3">
+            <!-- Add more images as needed -->
+        </div>
+    </div>
+    <button class="slider-button" id="prev">Previous</button>
+    <button class="slider-button" id="next">Next</button>
+
+    <script>
+        const container = document.querySelector(".slider-container");
+        const prevButton = document.getElementById("prev");
+        const nextButton = document.getElementById("next");
+
+        let slideIndex = 0;
+
+        function showSlide(index) {
+            if (index < 0) {
+                slideIndex = container.children.length - 1;
+            } else if (index >= container.children.length) {
+                slideIndex = 0;
+            }
+            const translateX = -slideIndex * 300; // Width of a single image
+            container.style.transform = `translateX(${translateX}px)`;
+        }
+
+        prevButton.addEventListener("click", () => {
+            slideIndex--;
+            showSlide(slideIndex);
+        });
+
+        nextButton.addEventListener("click", () => {
+            slideIndex++;
+            showSlide(slideIndex);
+        });
+
+        showSlide(slideIndex); // Show the initial slide
+    </script>
+</body>
+</html>
